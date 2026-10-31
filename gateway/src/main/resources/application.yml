@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 2000
+        response-timeout: 5m
+      routes:
+        - id: catalog
+          uri: ${CATALOG_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/catalog/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: catalogRoute
+                fallbackUri: forward:/fallback/catalog
+        - id: enrollment
+          uri: ${ENROLLMENT_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/enrollments/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: enrollmentRoute
+                fallbackUri: forward:/fallback/enrollment
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:enrollment-platform-demo-signing-key-32}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

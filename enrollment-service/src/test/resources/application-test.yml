@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:enrollment-test;MODE=LEGACY;DB_CLOSE_DELAY=-1;LOCK_TIMEOUT=10000
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+enrollment:
+  queue: unstable
+catalog:
+  base-url: http://127.0.0.1:9
+security:
+  jwt:
+    secret: test-secret-test-secret-test-secret-1
+logging:
+  level:
+    root: WARN
+    com.course: INFO
