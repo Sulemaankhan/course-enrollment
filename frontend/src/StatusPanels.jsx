@@ -1,6 +1,6 @@
 export function CourseSummary({ offering, status }) {
   return (
-    <section className="course">
+    <section id="course" className="course">
       <div>
         <p className="eyebrow">{status.term} · {status.courseCode}</p>
         <h2>{status.title}</h2>
@@ -20,7 +20,7 @@ export function CourseSummary({ offering, status }) {
 export function Boards({ status }) {
   return (
     <section className="boards">
-      <article>
+      <article id="roster">
         <h3>Roster</h3>
         {status.roster.length === 0 && <p className="hint">No seats taken.</p>}
         <ol>
@@ -32,7 +32,7 @@ export function Boards({ status }) {
           ))}
         </ol>
       </article>
-      <article>
+      <article id="waitlist">
         <h3>FIFO waitlist</h3>
         {status.waitlist.length === 0 && <p className="hint">Nobody is waiting.</p>}
         <ol>

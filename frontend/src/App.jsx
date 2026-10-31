@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import AdminDesk from "./AdminDesk";
 import LoginScreen from "./LoginScreen";
+import SiteFrame from "./SiteFrame";
 import UserDesk from "./UserDesk";
 
 const SESSION_KEY = "course-enrollment-session";
@@ -26,7 +27,13 @@ export default function App() {
 
   const signOut = useCallback(() => persist(null), [persist]);
 
-  if (!session) return <LoginScreen onSignedIn={persist} />;
-  if (session.role === "ADMIN") return <AdminDesk session={session} onSignOut={signOut} />;
-  return <UserDesk session={session} onSignOut={signOut} />;
+  let screen = <LoginScreen onSignedIn={persist} />;
+  if (session?.role === "ADMIN") screen = <AdminDesk session={session} onSignOut={signOut} />;
+  else if (session) screen = <UserDesk session={session} onSignOut={signOut} />;
+
+  return (
+    <SiteFrame session={session} onSignOut={signOut}>
+      {screen}
+    </SiteFrame>
+  );
 }

@@ -44,12 +44,17 @@ export default function LoginScreen({ onSignedIn }) {
 
   return (
     <div className="login-shell">
-      <section className="login-card">
-        <p className="eyebrow">Registrar desk</p>
-        <h1>Sign in</h1>
-        <p className="hint">Learners open their own enrollment screen. The admin account opens the roster and waitlist.</p>
-        <form onSubmit={submit}>
-          <label>
+      <section id="sign-in" className="login-card">
+        <div className="login-aside">
+          <p className="eyebrow">Registrar desk</p>
+          <h1>Course enrollment</h1>
+          <p>Learners open their own enrollment screen. The admin account opens the roster and the FIFO waitlist.</p>
+        </div>
+        <div className="login-panel">
+          <h2>Sign in</h2>
+          <p className="hint">Choose a demo account, then sign in with the shared password.</p>
+          <form onSubmit={submit}>
+            <label>
             Username
             <input
               name="username"
@@ -57,8 +62,8 @@ export default function LoginScreen({ onSignedIn }) {
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
-          </label>
-          <label>
+            </label>
+            <label>
             Password
             <input
               name="password"
@@ -67,24 +72,25 @@ export default function LoginScreen({ onSignedIn }) {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-          </label>
-          <button type="submit" disabled={busy}>{busy ? "Signing in" : "Sign in"}</button>
-        </form>
-        <p className="hint">Demo password is <strong>password</strong>. Choose an account to fill the username.</p>
-        <div className="account-row">
-          {ACCOUNTS.map((account) => (
-            <button
-              key={account.id}
-              type="button"
-              className={username === account.id ? "chip active" : "chip"}
-              onClick={() => setUsername(account.id)}
-            >
-              <span>{account.name}</span>
-              <small>{account.note}</small>
-            </button>
-          ))}
+            </label>
+            <button type="submit" disabled={busy}>{busy ? "Signing in" : "Sign in"}</button>
+          </form>
+          <p className="hint">Demo password is <strong>password</strong>. Choose an account to fill the username.</p>
+          <div className="account-row">
+            {ACCOUNTS.map((account) => (
+              <button
+                key={account.id}
+                type="button"
+                className={username === account.id ? "chip active" : "chip"}
+                onClick={() => setUsername(account.id)}
+              >
+                <span>{account.name}</span>
+                <small>{account.note}</small>
+              </button>
+            ))}
+          </div>
+          <p className={`flash flash-${tone}`} role="status">{message}</p>
         </div>
-        <p className={`flash flash-${tone}`} role="status">{message}</p>
       </section>
     </div>
   );

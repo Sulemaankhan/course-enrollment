@@ -48,21 +48,14 @@ export default function AdminDesk({ session, onSignOut }) {
           <p className="eyebrow">Admin screen</p>
           <h1>Registrar overview</h1>
         </div>
-        <div className="who">
-          <p className={`live live-${live}`}>{live === "live" ? "Live" : live === "reconnecting" ? "Reconnecting" : live === "offline" ? "Offline" : "Waiting"}</p>
-          <div>
-            <strong>{session.displayName}</strong>
-            <span>Admin</span>
-          </div>
-          <button type="button" className="text-button" onClick={onSignOut}>Sign out</button>
-        </div>
+        <p className={`live live-${live}`}>{live === "live" ? "Live" : live === "reconnecting" ? "Reconnecting" : live === "offline" ? "Offline" : "Waiting"}</p>
       </header>
 
       <main className="stage single">
         {status && (
           <>
             <CourseSummary offering={offering} status={status} />
-            <section className="you">
+            <section id="access" className="you">
               <div>
                 <p className="eyebrow">Access</p>
                 <h3>{session.displayName}</h3>
@@ -73,7 +66,14 @@ export default function AdminDesk({ session, onSignOut }) {
             <Boards status={status} />
           </>
         )}
-        {!status && <p className="empty">Loading the offering, the roster, and the FIFO waitlist.</p>}
+        {!status && (
+          <>
+            <p id="course" className="empty">Loading the offering, the roster, and the FIFO waitlist.</p>
+            <div id="access" />
+            <div id="roster" />
+            <div id="waitlist" />
+          </>
+        )}
         <p className={`flash flash-${tone}`} role="status">{message}</p>
       </main>
     </div>

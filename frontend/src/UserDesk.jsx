@@ -78,21 +78,14 @@ export default function UserDesk({ session, onSignOut }) {
           <p className="eyebrow">Learner screen</p>
           <h1>Course enrollment</h1>
         </div>
-        <div className="who">
-          <p className={`live live-${live}`}>{live === "live" ? "Live" : live === "reconnecting" ? "Reconnecting" : live === "offline" ? "Offline" : "Waiting"}</p>
-          <div>
-            <strong>{session.displayName}</strong>
-            <span>Learner</span>
-          </div>
-          <button type="button" className="text-button" onClick={onSignOut}>Sign out</button>
-        </div>
+        <p className={`live live-${live}`}>{live === "live" ? "Live" : live === "reconnecting" ? "Reconnecting" : live === "offline" ? "Offline" : "Waiting"}</p>
       </header>
 
       <main className="stage single">
         {status && (
           <>
             <CourseSummary offering={offering} status={status} />
-            <section className="you">
+            <section id="seat" className="you">
               <div>
                 <p className="eyebrow">Signed in</p>
                 <h3>{viewer.displayName}</h3>
@@ -110,7 +103,14 @@ export default function UserDesk({ session, onSignOut }) {
             <Boards status={status} />
           </>
         )}
-        {!status && <p className="empty">Loading the offering, the roster, and the FIFO waitlist.</p>}
+        {!status && (
+          <>
+            <p id="course" className="empty">Loading the offering, the roster, and the FIFO waitlist.</p>
+            <div id="seat" />
+            <div id="roster" />
+            <div id="waitlist" />
+          </>
+        )}
         <p className={`flash flash-${tone}`} role="status">{message}</p>
       </main>
     </div>

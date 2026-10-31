@@ -31,7 +31,7 @@
         <springdoc.version>2.8.17</springdoc.version>
         <ojdbc.version>23.26.3.0.0</ojdbc.version>
         <jacoco.version>0.8.12</jacoco.version>
-        <!-- Library modules have no main class. Runnable services set this to false. -->
+        <!-- Library modules are not launched. Runnable services set this to false. -->
         <spring-boot.run.skip>true</spring-boot.run.skip>
     </properties>
 
@@ -51,4 +51,19 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <!-- common stays a library even with an application class. Services set spring-boot.run.skip to false. -->
+                        <skip>${spring-boot.run.skip}</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
