@@ -24,7 +24,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.Map;
 
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
 @RestControllerAdvice
 public class ServletApiExceptionHandler extends ResponseEntityExceptionHandler {
 

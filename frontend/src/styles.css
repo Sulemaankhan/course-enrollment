@@ -561,9 +561,13 @@ h3 { font-size: 1.05rem; }
   .who div, .meter { align-items: flex-start; }
   .desk { padding: 16px 14px 36px; }
   h1 { font-size: 1.7rem; }
-  .site-header-inner { align-items: flex-start; flex-wrap: wrap; }
+  .site-header-inner { align-items: center; flex-wrap: wrap; }
   .site-nav { order: 3; width: 100%; }
-  .site-user { margin-left: 0; }
-  .site-user-meta { align-items: flex-start; }
+  .site-user { margin-left: auto; }
+  .top .live { align-self: flex-start; }
+}
+
+@media (max-width: 640px) {
+  .site-user-meta { display: none; }
   .site-footer-inner, .footer-base { grid-template-columns: 1fr; display: grid; }
 }
